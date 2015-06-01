@@ -1,0 +1,163 @@
+/* nest home */
+.nest {
+    height: 600px;
+}
+
+.user {
+    color: #666666;
+    padding-top: 8px;
+    float: right;
+    text-align: right;
+    line-height: 130%;
+}
+
+#message {
+    display: block;
+    margin: -10px 0px 10px 0px;
+    font-weight: bold;
+}
+
+.nest-box {
+    width: 413px;
+    padding: 0px 15px 15px 15px;
+    margin-bottom: 10px;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+.nest-right-col {
+    position: absolute;
+    right: 28px;
+}
+
+.nest-left-col {
+    position: absolute;
+    left: 28px;
+}
+
+#profile-table {
+    width: 100%;
+}
+
+#profile-table td {
+    padding: 5px 0px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#uniform-table {
+    width: 100%;
+}
+
+#uniform-table td, #uniform-table tr {
+    padding: 5px 0px;
+}
+
+#bulletin-list {
+    height: 133px;
+    overflow-y: auto;
+}
+
+#bulletin-list::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	background-color: #F5F5F5;
+}
+
+#bulletin-list::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+#bulletin-list::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+/* profile */
+#profile-form-table, #password-form-table {
+    width: 100%;
+}
+
+#profile-form-table td, #profile-form-table tr, #password-form-table td, #password-form-table tr {
+    padding: 5px 0px;
+}
+
+#profile-form-table th, #reg_form th {
+    text-align: left;
+    font-weight: normal;
+    font-size: 11pt;
+    font-style: italic;
+    color: darkslategray;
+    border-bottom: 1px solid gray;
+}
+
+.profile_button {
+    border: 1px solid gray;
+    padding: 5px 10px;
+    background: lightgray;
+}
+
+/* registration page */
+#reg_form table {
+    width: 100%;
+}
+
+#reg_form tr {
+    padding: 0px 0px 12px 8px;
+}
+
+#reg_form td, #nest td {
+    padding: 10px;
+}
+
+/* login page */
+#login_form table {
+    margin: 0 auto;
+    border-collapse: separate;
+    padding: 15px 15px 7px 15px;
+    /*border-spacing: 15px;*/
+    background-color: #C4D8E2;
+    border: 1px solid gray;
+    border-radius: 4px;
+    color: #333333;
+}
+
+#login_form tr, #login_form td {
+    padding-bottom: 10px;
+}
+
+input.text {
+    width: 240px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+    padding: 5px 10px;
+    font-size: 11pt;
+}
+
+input.text:focus {
+    outline: none;
+}
+
+input.button {
+    width: 85px;
+    height: 35px;
+    font-size: 11pt;
+    -webkit-appearance: none;
+    background-color: #436B95;
+    color: white;
+    border: 2px solid #bbbbbb;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+
+input.button:hover {
+    background-color: #3d6187;
+    cursor: pointer;
+}
+
+
+

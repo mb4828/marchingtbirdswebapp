@@ -1,0 +1,36 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <h2>Marching Band FAQs</h2>
+
+    <h3 class="blue">1. What is marching band?</h3>
+    <p>Marching Band is a <b>club, sport, academic subject, and a civic group</b>. The marching band is the only activity at Mahwah High School that allows students the opportunity to spend time with friends; perform in parades, civic events, and football games; earn 2.5 credits towards graduation; and receive a varsity letter all at the same time! If you don't play an instrument or spin a flag, our qualified staff will be happy to teach you to do whatever you are interested in. Marching band is something that everyone can do!</p>
+    <br />
+
+    <h3 class="blue">2. Where and when does the band perform?</h3>
+    <p>The marching band travels with the football team to every game. Our purpose at games is not only to play a good half-time show, but to also pump up the crowd and our team while the clock is running.</p>
+    <p>The marching band performs at:
+        <ul>
+            <li><b>Home and away football games</b></li>
+            <li><b>Band competitions and festivals</b></li>
+            <li><b>Other parades and civic events, including Mahwah Day and Memorial Day</b></li>
+        </ul>
+    </p>
+    <br />
+
+    <h3 class="blue">3. Can I play a sport and still be in marching band?</h3>
+    <p>In short, <b>YES!</b><br /><br />Many students in our band play fall sports and are still able to participate in marching band. Our staff places great emphasis on flexibility in getting anyone involved with the band who would like to participate. Partially conflicting sports are no issue as long as the staff is made aware of any upcoming absences in advance. In addition, our rehearsal schedule is coordinated with the athletics department to ensure as few conflicts as possible.</p>
+    <br />
+
+    <h3 class="blue">4. What goes on at band camp?</h3>
+    <p>Band camp is the time when a majority of our training for the season goes on. It gets students up off their feet and builds the strength, stamina, and spirit that are needed throughout the season. Contrary to popular belief, band camp is NOT like the way it is portrayed in the movies. It is a fun and positive experience that many students enjoy and look forward to.<br /><br />To learn more about band camp, visit the <a href="{% url 'bandcamp' %}">About Band Camp</a> page.</p>
+    <br />
+
+    <h3 class="blue">5. How difficult is it to be a member of a marching band?</h3>
+    <p><b>Don't worry!</b><br /><br />Marching band may look very difficult, but everything that the audience sees is the result of countless hours of work and practice to get things right. Our staff starts out very slow to make sure that new members understand the basics, and there are always older veterans around to help new students acclimate. Throughout all the years our program has existed, <b>every student who has joined the Marching Thunderbirds has been able to have a successful season</b>. We know that it can be a little unnerving to try new activities, especially a big commitment like marching band, but we encourage you to have confidence in yourself and give it a try!</p>
+
+    <img src="{% static 'marchingtbirds/faqs.jpg' %}" alt="" />
+
+{% endblock %}

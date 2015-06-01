@@ -1,0 +1,51 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <span class="user"><br />Logged in as <b>{{ user.first_name }} {{ user.last_name }}</b><br />
+    <a href="/nest/change_password/">Change password</a> / <a href="{% url 'logout' %}">Log out</a></span>
+    <h2>My profile</h2>
+
+    <p>{% if saved %}<a href="/nest/">< Return to dashboard</a>
+    {% else %}<a href="/nest/" onclick="return confirm('Are you sure you want to navigate away from this page? Any unsaved changes will be lost.')">< Return to dashboard</a>{% endif %}
+    </p>
+
+    {% if message %}<p style="font-weight:bold">{{ message|safe }}</p>{% endif %}
+
+    <form id="profile_form" method="post" action="/nest/profile/?mode=edit">
+        {% csrf_token %}
+
+        <table id="profile-form-table">
+        {% for field in form %}
+            <tr id="{{ field.name }}"><td>{{ field.label }}</td>
+                <td>{{ field }}
+                {% if field.errors %}<br /><span style="color:firebrick"><i class="fa fa-asterisk"></i> {{ field.errors.as_text|cut:"* "|cut:"." }}</span>{% endif %}</td></tr>
+        {% endfor %}
+
+        {% if not view %}
+            <tr><td colspan="2" style="text-align:center">
+                    <input class="profile_button" type="button" onclick="if(confirm('Are you sure?')){location.reload()}" value="Clear changes" />
+                    <input class="profile_button" type="submit" name="submit" value="Save profile" />
+                </td></tr>
+
+        {% endif %}
+        </table>
+
+    </form>
+
+    <script>
+        // form headings
+        $('#first_name').before('<th colspan="2">Student information</th>');
+        $('#student_email').before('<th colspan="2">E-mail addresses</th>');
+        $('#home_phone').before('<th colspan="2">Phone numbers</th>');
+        $('#street_address').before('<th colspan="2">Street address</th>');
+        $('#emergency_contact').before('<th colspan="2">Emergency contact</th>')
+
+        {% if view %}
+        // field disable
+        $('#profile_form').find(':input').prop('disabled', true);
+        {% endif %}
+    </script>
+
+{% endblock %}

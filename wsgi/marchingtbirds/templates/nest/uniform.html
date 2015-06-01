@@ -1,0 +1,46 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div id="sidebar">
+        <h4>NEST options</h4>
+
+        <p><a href="/nest/">NEST Home ></a></p>
+
+        <h5>My Profile</h5>
+
+        <p><a href="/nest/profile/?mode=view">View my profile ></a><br />
+        <a href="/nest/profile/?mode=edit">Edit my profile ></a><br />
+        </p>
+
+        <h5>My Uniform</h5>
+
+        <p><a href="/nest/uniform/">View my uniform ></a></p>
+
+        <h5>My account</h5>
+
+        <p><a href="/nest/change_password/">Change my password ></a><br />
+        <a href="{% url 'logout' %}">Log out ></a></p>
+    </div>
+
+    <div id="nest">
+        <span class="login-name">Logged in as <b>{{ user.first_name }} {{ user.last_name }}</b></span>
+        <h2>My uniform assignment</h2>
+        {% if message %}<p style="font-weight:bold">{{ message }}</p>{% endif %}
+
+        {% if student %}
+        <table id="uniform-table">
+            <tr><td>Jacket</td><td>{{ student.jacket }}</td></tr>
+            <tr><td>Pants</td><td>{{ student.pants }}</td></tr>
+            <tr><td>Hat</td><td>{{ student.hat }}</td></tr>
+            <tr><td>Raincoat</td><td>{{ student.raincoat }}</td></tr>
+            <tr><td>T-shirt size</td><td>{{ tshirt }}</td></tr>
+            <tr><td>Uniform returned?</td><td>{% if student.returned %}<i class="fa fa-check fa-lg" style="color:green"></i>{% else %}<i class="fa fa-remove fa-lg" style="color:red"></i>{% endif %}</td></tr>
+        </table>
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

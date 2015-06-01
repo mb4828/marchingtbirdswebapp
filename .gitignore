@@ -3,5 +3,7 @@
 *.bak
 *.orig
 *~
+*.pyc
 .project
 .pydevproject
+venv/

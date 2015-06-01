@@ -1,0 +1,119 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    {% if not student.tshirt %}
+    <span class="user"><br />Logged in as <b>{{ user.first_name }} {{ user.last_name }}</b><br />
+    <a href="/nest/change_password/">Change password</a> / <a href="{% url 'logout' %}">Log out</a></span>
+    <h2>Welcome to NEST!</h2>
+
+        <p>Thank you for registering with <b>NEST</b>, the <b>N</b>ext Generation <b>E</b>quipment & <b>S</b>tudent Management <b>T</b>ool!</p>
+        <p>The next step is to complete your user profile, which is essential to ensure a safe and fun season for everyone in
+        the band. Once you complete this profile, your dashboard will be unlocked, allowing you access to all of NEST's
+        features.</p>
+
+        <p>Please complete your user profile by <a href="/nest/profile/?mode=edit">clicking here</a>.</p>
+
+    {% else %}
+    <h2>NEST Dashboard for {{ user.first_name }} {{ user.last_name }}</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <span id="message"
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    style="color:green"><i class="fa fa-check-circle"></i>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    style="color:red"><i class="fa fa-exclamation-circle"></i>
+                {% else %}
+                    style="color:blue"><i class="fa fa-info-circle"></i>
+                {% endif %}
+            {{ message }}</span>
+        {% endfor %}
+    {% endif %}
+
+    <div class="nest">
+
+        <div class="nest-left-col">
+            <div class="nest-box">
+                <span style="float:right"><br /><a href="/nest/profile/?mode=edit">Edit my profile ></a></span>
+                <h4>My profile</h4>
+
+                {% if student %}
+                <table id="profile-table">
+                    <tr style="border-bottom:1px solid gray; font-style:italic; font-weight: bold;"><td colspan="2">Student information</td></tr>
+                    <tr><td>First name</td><td>{{ student.first_name }}</td></tr>
+                    <tr><td>Last name</td><td>{{ student.last_name }}</td></tr>
+                    <tr><td>Graduation year</td><td>{{ student.grad_year }}</td></tr>
+                    <tr><td>Instrument</td><td>{{ student.instrument }}</td></tr>
+                    <tr><td>T-shirt size</td><td>{{ student.tshirt }}</td></tr>
+
+                    <tr style="border-bottom:1px solid gray; font-style:italic; font-weight: bold;"><td colspan="2">E-mail addresses</td></tr>
+                    <tr><td>Student's e-mail address</td><td>{{ student.student_email }}</td></tr>
+                    <tr><td>Parent's e-mail address 1</td><td>{{ student.parent_email1 }}</td></tr>
+                    <tr><td>Parent's e-mail address 2</td><td>{{ student.parent_email2 }}</td></tr>
+
+                    <tr style="border-bottom:1px solid gray; font-style:italic; font-weight: bold;"><td colspan="2">Phone numbers</td></tr>
+                    <tr><td>Home phone</td><td>{{ student.home_phone }}</td></tr>
+                    <tr><td>Parent's cell phone 1</td><td>{{ student.parent_cell1 }}</td></tr>
+                    <tr><td>Parent's cell phone 2</td><td>{{ student.parent_cell2 }}</td></tr>
+
+                    <tr style="border-bottom:1px solid gray; font-style:italic; font-weight: bold;"><td colspan="2">Street address</td></tr>
+                    <tr><td>Street Address</td><td>{{ student.street_address }}</td></tr>
+
+                    <tr style="border-bottom:1px solid gray; font-style:italic; font-weight: bold;"><td colspan="2">Emergency contact</td></tr>
+                    <tr><td>Emergency contact name</td><td>{{ student.emergency_contact }}</td></tr>
+                    <tr><td>Relationship to student</td><td>{{ student.emergency_relationship }}</td></tr>
+                    <tr><td>Phone number</td><td>{{ student.emergency_phone }}</td></tr>
+                </table>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div class="nest-right-col">
+
+            <div class="nest-box">
+                <h4>Account options</h4>
+                <p><a href="mailto:matt@mattbrauner.com?subject=Marchingtbirds.tk bug report">Report a bug ></a></a><br />
+                   <a href="/nest/change_password/">Change password ></a><br />
+                   <a href="{% url 'logout' %}">Log out ></a>
+                </p>
+
+            </div>
+
+            <div class="nest-box">
+                <h4>Uniform assignment</h4>
+
+                {% if student %}
+                <table id="uniform-table">
+                    <tr><td>Jacket</td><td>{{ student.jacket }}</td></tr>
+                    <tr><td>Pants</td><td>{{ student.pants }}</td></tr>
+                    <tr><td>Hat</td><td>{{ student.hat }}</td></tr>
+                    <tr><td>Raincoat</td><td>{{ student.raincoat }}</td></tr>
+                    <tr><td>Uniform returned?</td><td>{% if student.returned %}<i class="fa fa-check fa-lg" style="color:green"></i>{% else %}<i class="fa fa-remove fa-lg" style="color:red"></i>{% endif %}</td></tr>
+                </table>
+                {% endif %}
+
+            </div>
+
+            <div class="nest-box">
+                <h4>Bulletins</h4>
+                {% if not bulletins %}
+                    <p>No messages to display</p>
+                {% else %}
+                    <div id="bulletin-list">
+                    {% for entry in bulletins %}
+                        <p><i>{{ entry.last_update|date:"n/j/y, h:i a" }}</i> - {{ entry.message|safe|slice:"3:-4" }}</p>
+                    {% endfor %}
+                    </div>
+
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    {% endif %}
+
+{% endblock %}

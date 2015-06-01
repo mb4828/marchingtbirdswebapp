@@ -1,0 +1,120 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <aside id="sidebar">
+        <h4>Quick Links</h4>
+
+        <h5>For Students & Parents</h5>
+
+        <p><a href="{% url 'calendar' %}">Full Season Calendar</a><br />
+        <a href="{% url 'staff' %}">Staff Contact Information</a><br />
+        <a href="{% url 'fieldshow' %}">This Year's Field Show</a><br />
+        <a href="http://hs.mahwah.k12.nj.us/pages/Mahwah_High_School" target="_blank">MHS Website >></a></p>
+
+        <h5>For Visitors & Fans</h5>
+
+        <p><a href="{% url 'tradition' %}">Our Tradition and Philosophy</a><br />
+        <a href="{% url 'hist' %}">Band History</a><br />
+        <a href="{% url 'faq' %}">Marching Band FAQs</a><br />
+        <a href="{% url 'staff' %}">Contact Us</a></p>
+
+        <p><a href="https://www.facebook.com/MHSMTB" target="_blank"><img src="{% static 'marchingtbirds/facebook.png' %}" alt="Find us on Facebook!" /></a></p>
+
+        <hr />
+        <h4>Upcoming Events</h4>
+
+        <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=AGENDA&amp;height=250&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=5f0qmqm95hls81js78gujokj80%40group.calendar.google.com&amp;color=%232952A3&amp;ctz=America%2FNew_York" style=" border-width:0 " width="240" height="250" frameborder="0" scrolling="no"></iframe>
+
+        <hr />
+        <h4>Weather</h4>
+
+        <a href="http://www.accuweather.com/en/us/mahwah-township-nj/07430/weather-forecast/2192061" class="aw-widget-legal"></a><div id="awcc1415034728562" class="aw-widget-current"  data-locationkey="2192061" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1415034728562"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+    </aside>
+
+    <div id="news">
+
+        {% if messages %}
+            {% for message in messages %}
+                <span id="message"
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        style="color:green; margin-top:15px"><i class="fa fa-check-circle"></i>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        style="color:red; margin-top:15px"><i class="fa fa-exclamation-circle"></i>
+                    {% else %}
+                        style="color:blue; margin-top:15px"><i class="fa fa-info-circle"></i>
+                    {% endif %}
+                {{ message }}</span>
+            {% endfor %}
+        {% endif %}
+
+        {% if cover %}
+            <img src="{{ cover.image }}" alt="Mahwah Marching Thunderbirds" />
+            {% if cover.caption %}<span id="caption">{{ cover.caption }}</span>{% endif %}
+        {% endif %}
+
+        <h4>Latest News</h4>
+
+        {% if post_list %}
+
+            {% for entry in post_list %}
+                <article>
+                    <img class="poststart" src="{% static 'marchingtbirds/feath.jpg' %}" alt="" />
+                    <h3><a href="{% url 'detail' entry.getUrl %}" class="article">{{ entry.title }}</a></h3>
+                    <span class="timestamp">{{ entry.pub_date }}</span>
+                    {{ entry.content|safe }}
+                    <br />
+                </article>
+            {% endfor %}
+
+            {% if more %}
+                <a href="{% url 'posts' %}"><p style="font-style:italic; text-align:right">More posts >></p></a>
+            {% endif %}
+
+        {% else %}
+
+            <p>No posts to display</p>
+
+        {% endif %}
+
+    </div>
+
+    {% comment %}
+    <aside id="bottombar">
+        <table>
+            <tr>
+                <td>
+                    <h4>Quick Links</h4>
+
+                    <h5>For Students & Parents</h5>
+
+                    <p><a href="{% url 'calendar' %}">Full Season Calendar</a><br />
+                    <a href="#">Staff Contact Information</a><br />
+                    <a href="#">This Year's Field Show</a><br />
+                    <a href="http://hs.mahwah.k12.nj.us/pages/Mahwah_High_School" target="_blank">MHS Website >></a></p>
+
+                    <h5>For Visitors & Fans</h5>
+
+                    <p><a href="{% url 'tradition' %}">Our Tradition and Philosophy</a><br />
+                    <a href="#">Band History</a><br />
+                    <a href="{% url 'faq' %}">Marching Band FAQs</a><br />
+                    <a href="#">Contact Us</a></p>
+
+                    <p><a href="https://www.facebook.com/MHSMTB" target="_blank"><img src="{% static 'marchingtbirds/facebook.png' %}" alt="Find us on Facebook!" /></a></p>
+
+                </td>
+                <td>
+                    <h4>Weather</h4>
+                    <a href="http://www.accuweather.com/en/us/mahwah-township-nj/07430/weather-forecast/2192061" class="aw-widget-legal"></a><div id="awcc1415034728562" class="aw-widget-current"  data-locationkey="2192061" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1415034728562"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+                </td>
+                <td>
+                    <h4>Upcoming Events</h4>
+                    <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=AGENDA&amp;height=225&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=5f0qmqm95hls81js78gujokj80%40group.calendar.google.com&amp;color=%232952A3&amp;ctz=America%2FNew_York" style=" border-width:0 " width="270" height="225" frameborder="0" scrolling="no"></iframe>
+                </td>
+            </tr>
+        </table>
+    </aside>
+    {% endcomment %}
+
+{% endblock %}

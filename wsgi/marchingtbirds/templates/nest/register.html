@@ -1,0 +1,53 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <style type="text/css">
+        .reg_0 { width: 25%; }
+        .reg_1 { width: 20%; }
+        .reg_2 { width: 55%; }
+    </style>
+
+    <h2>Create a NEST account</h2>
+
+    {% if disabled %}
+
+    <p>Sorry, new user registration is disabled at this time. Please check back later or contact the Marching Thunderbirds staff for assistance.</p>
+
+    {% else %}
+
+        {% if registered %}
+        <p>Thank you for registering! Follow the link below to the next page where you will then be asked to complete your profile</p>
+        
+        <p><a href="/nest/">Click here to continue</a></p>
+
+        {% else %}
+
+        <p>Please fill out the form below in order to register for an account:</p>
+
+        <form id="reg_form" method="post" action="/nest/register/">
+            <table>
+            {% csrf_token %}
+            {% for field in reg_form %}
+                <tr id="{{ field.name }}"><td class="reg_0">{{ field.label|safe }}</td>
+                    <td class="reg_1">{{ field }}</td>
+                    <td class="reg_2">{% if field.errors %}<span style="color:firebrick"><i class="fa fa-asterisk"></i> {{ field.errors.as_text|cut:"* "|cut:"." }}</span>{% endif %}</td>
+                </tr>
+            {% endfor %}
+                <tr><td colspan="3" style="text-align:center"><input type="submit" name="submit" value="Create account" /></td></tr>
+            </table>
+        </form>
+
+        {% endif %}
+
+    {% endif %}
+
+        <script>
+            // form headings
+            $('#fname').before('<tr><th colspan="3">Student information</th></tr>');
+            $('#username').before('<tr><th colspan="3">Account options</th></tr>');
+            $('#authcode').before('<tr><th colspan="3">Authentication</th></tr>')
+        </script>
+
+{% endblock %}

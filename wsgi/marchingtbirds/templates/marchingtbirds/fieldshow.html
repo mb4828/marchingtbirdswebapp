@@ -1,0 +1,53 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <h2>Current Field Show</h2>
+
+    {% if show and show.display %}
+
+        <h3 style="text-align:center">The Marching Thunderbirds are proud to announce our {{ show.year }} field show:</h3>
+
+        {% if show.display_title %}
+            <h3 style="text-align:center;font-size:28pt;font-style:italic;color:midnightblue;text-decoration:underline">{{ show.title }}</h3>
+        {% endif %}
+
+        {% if show.image and show.image_width %}
+            <span><img src="{{ show.image }}" alt="field show image" class="fieldshow" style="width:{{ show.image_width }}px"/></span>
+        {% endif %}
+
+        <h3 style="text-align:center">{{ show.tag }}</h3><br />
+
+        {% if show.links %}{{ show.links|safe }}<br /><br />{% endif %}
+
+        {% if show.description %}{{ show.description|safe }}{% endif %}
+
+    {% else %}
+        <span id="sorry" style="
+            display:block;
+            margin:0 auto;
+            font-family: 'Arial';
+            font-size: 4em;
+            color: red;
+            font-weight: bold;
+            font-style: italic;
+            text-align:center;"></span>
+
+        <p style="text-align:center;font-weight:bold;color:red;font-style:italic;">Information regarding our new field show will be posted when available</p>
+
+        <script type = "text/javascript">
+            var arr = new Array(
+                                "Aw man!", "Aw snap!", "Aw shoot!", "Aw no!", "Aw gosh!", "Awww!",
+                                "Oh no!", "Oh my!", "Oh gosh!", "Oh shoot!", "Oh snap!",
+                                "Darn!", "Dang!", "Drat!",
+                                "Sorry!", "Shoot!",
+                                "Whoops!", "Well shoot!", "Well drat!", "Well darn!", "Well snap!",
+                                "Noooo!", "Nooooooo!", "Noooooooooo!", "Nooooooooooooo!", "NOOOOOOOOOOOOOOOO!");
+            var n = Math.floor(Math.random()*arr.length);
+            document.getElementById("sorry").innerHTML = arr[n];
+        </script>
+
+    {% endif %}
+
+{% endblock %}

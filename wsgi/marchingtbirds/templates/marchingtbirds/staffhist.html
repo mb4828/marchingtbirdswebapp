@@ -1,0 +1,60 @@
+{% extends "marchingtbirds/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <h2>{{ page_title }}</h2>
+
+    {% if page_title == 'Staff' %}
+        {% if entries %}
+            {% for entry in entries %}
+
+                <h3>{{ entry.name }}, {{ entry.title }}</h3>
+                {{ entry.bio|safe }}
+
+                {% if entry.email %}
+
+                    <p>
+                    <script type="text/javascript">
+	                document.write("<n uers=\"znvygb:{{ entry.obsfucate }}\" ery=\"absbyybj\">Fraq n zrffntr</n>".replace(/[a-zA-Z]/g,
+	                function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    </script>
+                    </p>
+
+                {% endif %}
+
+                <hr />
+
+            {% endfor %}
+        {% else %}
+            <p>No staff entries to display</p>
+        {% endif %}
+
+    {% elif page_title == 'History' %}
+        {% if entries %}
+            {% for entry in entries %}
+
+                <h3>{{ entry.year }}: {{ entry.title }}</h3>
+                {{ entry.description|safe }}
+                <hr />
+
+            {% endfor %}
+
+            <div class="pagination">
+                <table id="step-links">
+                    <tr>
+                        <td>{% if entries.has_previous %}<a href="?page={{ entries.previous_page_number }}" style="text-align:left;"><< Previous </a>{% endif %}</td>
+                        <td><p>Page {{ entries.number }} of {{ entries.paginator.num_pages }}</p></td>
+                        <td>{% if entries.has_next %}<a href="?page={{ entries.next_page_number }}" style="text-align:right;"> Next >></a>{% endif %}</td>
+                    </tr>
+                </table>
+            </div>
+
+        {% else %}
+            <p>No history to display</p>
+        {% endif %}
+    {% else %}
+        <p>Uh oh, something is broken!</p>
+    {% endif %}
+
+{% endblock %}
