@@ -8,4 +8,3 @@
 .pydevproject
 venv/
 .idea/
-db.sqlite3
