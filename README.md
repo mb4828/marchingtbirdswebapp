@@ -1,78 +1,33 @@
-Django on OpenShift
-===================
+Logentries on OpenShift
+======================
 
-This git repository helps you get up and running quickly w/ a Django
-installation on OpenShift.  The Django project name used in this repo
-is 'myproject' but you can feel free to change it.  Right now the
-backend is sqlite3 and the database runtime is found in
-`$OPENSHIFT_DATA_DIR/db.sqlite3`.
-
-Before you push this app for the first time, you will need to change
-the [Django admin password](#admin-user-name-and-password).
-Then, when you first push this
-application to the cloud instance, the sqlite database is copied from
-`wsgi/myproject/db.sqlite3` with your newly changed login
-credentials. Other than the password change, this is the stock
-database that is created when `python manage.py syncdb` is run with
-only the admin app installed.
-
-On subsequent pushes, a `python manage.py syncdb` is executed to make
-sure that any models you added are created in the DB.  If you do
-anything that requires an alter table, you could add the alter
-statements in `GIT_ROOT/.openshift/action_hooks/alter.sql` and then use
-`GIT_ROOT/.openshift/action_hooks/deploy` to execute that script (make
-sure to back up your database w/ `rhc app snapshot save` first :) )
-
-You can also turn on the DEBUG mode for Django application using the
-`rhc env set DEBUG=True --app APP_NAME`. If you do this, you'll get
-nicely formatted error pages in browser for HTTP 500 errors.
-
-Do not forget to turn this environment variable off and fully restart
-the application when you finish:
-
-```
-$ rhc env unset DEBUG
-$ rhc app stop && rhc app start
-```
+This git repo provides a quick method to get your OpenShift logs streaming to Logentries.
 
 Running on OpenShift
---------------------
-
-Create an account at https://www.openshift.com
-
-Install the RHC client tools if you have not already done so:
-    
-    sudo gem install rhc
-    rhc setup
-
-Create a python application
-
-    rhc app create django python-2.7
-
-Add this upstream repo
-
-    cd django
-    git remote add upstream -m master git://github.com/openshift/django-example.git
-    git pull -s recursive -X theirs upstream master
-
-Then push the repo upstream
-
-    git push
-
-Here, the [admin user name and password will be displayed](#admin-user-name-and-password), so pay
-special attention.
-	
-That's it. You can now checkout your application at:
-
-    http://django-$yournamespace.rhcloud.com
-
-Admin user name and password
 ----------------------------
-As the `git push` output scrolls by, keep an eye out for a
-line of output that starts with `Django application credentials: `. This line
-contains the generated admin password that you will need to begin
-administering your Django app. This is the only time the password
-will be displayed, so be sure to save it somewhere. You might want 
-to pipe the output of the git push to a text file so you can grep for
-the password later.
 
+Create a Logentries account at https://logentries.com/doc/openshift/
+
+Take note of the Account-Key that you are given, you will need it in the Configuration step below. If you have already created an account and haven't taken note of your account key, you can retrieve it following these instructions: 
+https://logentries.com/doc/accountkey/
+
+Add the upstream Logentries repo to the Openshift app (called 'myappname' in the example below) that you want Logentries to manage the logs of (**warning, this will overwrite and README.md you have in the base of your git repository**): 
+
+	cd myappname
+	git remote add upstream -m master https://github.com/logentries/le_openshift.git
+	git pull -s recursive -X theirs upstream master
+
+If you haven't got an Openshift app already setup, please refer to the Openshift documentation first (e.g. https://openshift.redhat.com/community/get-started).
+
+Configuration
+-------------
+
+Configure logentries/le_config.ini file with your Logentries Account Key. For this, simply paste the key inside the quotation marks in logentries/le_config.ini
+
+Then push the repo
+
+	git add .
+	git commit -m "my first commit"
+	git push
+
+That's it, you can now run your app and check your logs, by logging into your Logentries account and refreshing the page.
