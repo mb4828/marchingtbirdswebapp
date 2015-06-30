@@ -83,7 +83,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             # GETTING-STARTED: change 'db.sqlite3' to your sqlite3 database:
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME':     os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 
