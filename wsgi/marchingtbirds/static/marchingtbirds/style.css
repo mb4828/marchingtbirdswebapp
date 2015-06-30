@@ -40,7 +40,7 @@ article h3 {    /* news post title */
     font-weight: bold;
 }
 
-main h3 {   /* page subtitle */
+#main h3 {   /* page subtitle */
     font-size: 12pt;
     font-weight: bold;
 }
@@ -346,7 +346,7 @@ a:hover {
     opacity: 0.8;
 }
 
-#content > img {    /* page graphics in content section */
+#main > img {    /* page graphics in content section */
     display: block;
     width: 75%;
     margin: 20px auto;
