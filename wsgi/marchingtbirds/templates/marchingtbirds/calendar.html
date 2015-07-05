@@ -1,6 +1,7 @@
 {% extends "marchingtbirds/base.html" %}
 {% load static %}
 
+{% comment %}
 {% block extrahead %}
     <link rel='stylesheet' href="{% static 'marchingtbirds/fullcalendar/lib/marchingtbirdsui/jquery-ui.min.css' %}" />
     <link href="{% static 'marchingtbirds/fullcalendar/fullcalendar.css' %}" rel='stylesheet' />
@@ -8,8 +9,7 @@
     <script src="{% static 'marchingtbirds/fullcalendar/lib/moment.min.js' %}"></script>
     <script src="{% static 'marchingtbirds/fullcalendar/fullcalendar.min.js' %}"></script>
     <script src="{% static 'marchingtbirds/fullcalendar/gcal.js' %}"></script>
-
-
+    
     <script>
         $(document).ready(function() {
 
@@ -71,22 +71,23 @@
 
     </style>
 {% endblock %}
+{% endcomment %}
 
 {% block content %}
 
     <h2>Full Season Calendar</h2>
 
-    <!--<iframe src="https://www.google.com/calendar/embed?showTabs=0&amp;showTitle=0&amp;showCalendars=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=5f0qmqm95hls81js78gujokj80%40group.calendar.google.com&amp;color=%232952A3&amp;ctz=America%2FNew_York" style=" border-width:0 " width="100%" height="600" frameborder="0" scrolling="no"></iframe>-->
+    <iframe src="https://www.google.com/calendar/embed?showTabs=0&amp;showTitle=0&amp;showCalendars=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=5f0qmqm95hls81js78gujokj80%40group.calendar.google.com&amp;color=%232952A3&amp;ctz=America%2FNew_York" style=" border-width:0 " width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 
-    <div id='loading'>loading...</div>
-	<div id='calendar'></div>
+    <!--<div id='loading'>loading...</div>
+	<div id='calendar'></div>-->
 
 
     <h2>Tips</h2>
 
     <p>
         <ol>
-            <!--<li>You can print this calendar by selecting the "print" button</li>-->
+            <li>You can print this calendar by selecting the "print" button</li>
             <li>Bring up more information about an event by clicking on it</li>
             <li>Don't forget our attendance policy! Please notify the staff at least <b>1 week before a rehearsal</b> and <b>2 weeks before a performance</b> if you are going to be absent</li>
             <li>Add us to your personal calendar:
